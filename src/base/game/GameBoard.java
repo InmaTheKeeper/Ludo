@@ -1,9 +1,4 @@
 package base.game;
-
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
-
 public class GameBoard {
     BaseTile[] bases = {new BaseTile(PlayerColor.RED), new BaseTile(PlayerColor.GREEN), new BaseTile(PlayerColor.YELLOW), new BaseTile(PlayerColor.BLUE)};
     PlayerColor[] colors = {PlayerColor.RED, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.BLUE};
