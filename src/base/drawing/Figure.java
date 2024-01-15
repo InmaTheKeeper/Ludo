@@ -26,8 +26,8 @@ public class Figure {
         g.fillOval(x, y, width, width);
         g.setColor(Color.black);
         int fontSize = (int) (width * 0.7);
-        int fontX = (int) (x + width * 0.35);
-        int fontY = (int) (y + width * 0.7);
+        int fontX = (int) (x + width * 0.32);
+        int fontY = (int) (y + width * 0.65);
         Font font = new Font("Georgia", Font.ITALIC, fontSize);
         g.setFont(font);
         String text = "" + n;

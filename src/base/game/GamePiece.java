@@ -13,12 +13,15 @@ public class GamePiece {
         return clr;
     }
 
+    public boolean isOnBase(){
+        return currentTile instanceof GameBoard.BaseTile;
+    }
+
     public GameBoard.GameTile getCurTile() {
         return currentTile;
     }
     //TODO сделать функцию для проверки следующей клетки по слотам, да и вообще здесь обработка правил
     public void moveBy(int n) {
-        System.out.println("Rolled " + n);
         for (int i = 0; i < n; i++) {
             if (currentTile instanceof GameBoard.EntryTile entryTile && entryTile.clr == clr) {
                 currentTile = entryTile.nextEntry;

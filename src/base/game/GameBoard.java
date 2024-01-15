@@ -1,8 +1,8 @@
 package base.game;
 
 public class GameBoard {
-    BaseTile[] bases = {new BaseTile(PlayerColor.RED), new BaseTile(PlayerColor.GREEN), new BaseTile(PlayerColor.YELLOW), new BaseTile(PlayerColor.BLUE)};
-    PlayerColor[] colors = {PlayerColor.RED, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.BLUE};
+    protected static BaseTile[] bases = {new BaseTile(PlayerColor.RED), new BaseTile(PlayerColor.GREEN), new BaseTile(PlayerColor.YELLOW), new BaseTile(PlayerColor.BLUE)};
+    private PlayerColor[] colors = {PlayerColor.RED, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.BLUE};
 
     public GameBoard() {
         GameTile startTile = new EntryTile(colors[0]);
@@ -75,12 +75,18 @@ public class GameBoard {
     }
 
     //TODO сделать класс со слотами наследник GameTile и наследовать его всем кроме баз, потому что им слотыне нужны
-    private static class BaseTile extends GameTile {
+    static class BaseTile extends GameTile {
         PlayerColor clr;
+        protected int figAmount;
 
         public BaseTile(PlayerColor clr) {
             super();
             this.clr = clr;
+            figAmount = 4;
+        }
+
+        public int getFigAmount() {
+            return figAmount;
         }
     }
 

@@ -29,11 +29,11 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
         }
         if (code == KeyEvent.VK_A) {
             isAuto = !isAuto;
-            System.out.println("A pressed, isAuto = " + isAuto);
+            //System.out.println("A pressed, isAuto = " + isAuto);
         }
         if (code == KeyEvent.VK_F) {
             dp.nextTurn();
-            System.out.println("F pressed\nMade physical turn");
+            //System.out.println("F pressed\nMade physical turn");
         }
     }
 

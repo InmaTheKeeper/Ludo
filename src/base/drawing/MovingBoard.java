@@ -115,28 +115,6 @@ public class MovingBoard {
         g.fillOval(vertStartX - 5 * cellSize, vertStartY + 10 * cellSize, ovalR, ovalR);
         g.setColor(new Color(0, 0, 120));
         g.fillOval(vertStartX + 4 * cellSize, vertStartY + 10 * cellSize, ovalR, ovalR);
-        //white ellipses
-        g.setColor(Color.white);
-        // white in blue
-        g.fillOval((int) (vertStartX + 4 * cellSize + ovalR * 0.2), (int) (vertStartY + 10 * cellSize + ovalR * 0.2), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX + 4 * cellSize + ovalR * 0.2), (int) (vertStartY + 10 * cellSize + ovalR * 0.6), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX + 4 * cellSize + ovalR * 0.6), (int) (vertStartY + 10 * cellSize + ovalR * 0.2), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX + 4 * cellSize + ovalR * 0.6), (int) (vertStartY + 10 * cellSize + ovalR * 0.6), ovalR / 5, ovalR / 5);
-        //white in red
-        g.fillOval((int) (vertStartX - 5 * cellSize + ovalR * 0.2), (int) (vertStartY + 10 * cellSize + ovalR * 0.2), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX - 5 * cellSize + ovalR * 0.2), (int) (vertStartY + 10 * cellSize + ovalR * 0.6), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX - 5 * cellSize + ovalR * 0.6), (int) (vertStartY + 10 * cellSize + ovalR * 0.2), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX - 5 * cellSize + ovalR * 0.6), (int) (vertStartY + 10 * cellSize + ovalR * 0.6), ovalR / 5, ovalR / 5);
-        //white in yellow
-        g.fillOval((int) (vertStartX + 4 * cellSize + ovalR * 0.2), (int) (vertStartY + cellSize + ovalR * 0.2), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX + 4 * cellSize + ovalR * 0.2), (int) (vertStartY + cellSize + ovalR * 0.6), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX + 4 * cellSize + ovalR * 0.6), (int) (vertStartY + cellSize + ovalR * 0.2), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX + 4 * cellSize + ovalR * 0.6), (int) (vertStartY + cellSize + ovalR * 0.6), ovalR / 5, ovalR / 5);
-        //white in green
-        g.fillOval((int) (vertStartX - 5 * cellSize + ovalR * 0.2), (int) (vertStartY + cellSize + ovalR * 0.2), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX - 5 * cellSize + ovalR * 0.2), (int) (vertStartY + cellSize + ovalR * 0.6), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX - 5 * cellSize + ovalR * 0.6), (int) (vertStartY + cellSize + ovalR * 0.2), ovalR / 5, ovalR / 5);
-        g.fillOval((int) (vertStartX - 5 * cellSize + ovalR * 0.6), (int) (vertStartY + cellSize + ovalR * 0.6), ovalR / 5, ovalR / 5);
     }
 
     public void drawLayout(Graphics2D g) {
@@ -171,19 +149,25 @@ public class MovingBoard {
         }
     }
 
-    public void drawMovingBoard(Graphics2D g) {
+    private void drawText(Graphics2D g) {
         Font font = new Font("Georgia", Font.ITALIC, 30);
         g.setFont(font);
         String textF = "Press \"F\" to make one turn";
         String textA = "Press \"A\" to turn autoplay on/off";
         String textESC = "Press \"ESC\" to close application";
+        g.setColor(Color.white);
+        g.drawString(textF, (int) (screenWidth * 0.75), (int) (screenHeight * 0.2));
+        g.drawString(textA, (int) (screenWidth * 0.75), (int) (screenHeight * 0.25));
+        g.drawString(textESC, (int) (screenWidth * 0.75), (int) (screenHeight * 0.3));
+    }
+
+    public void drawMovingBoard(Graphics2D g) {
         drawBoardTiles(g);
         drawLayout(g);
         drawCenter(g);
         drawBases(g);
-        g.drawString(textF, (int) (screenWidth * 0.75), (int) (screenHeight * 0.2));
-        g.drawString(textA, (int) (screenWidth * 0.75), (int) (screenHeight * 0.25));
-        g.drawString(textESC, (int) (screenWidth * 0.75), (int) (screenHeight * 0.3));
+        drawText(g);
+
 
     }
 }
