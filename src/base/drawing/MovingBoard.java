@@ -172,10 +172,16 @@ public class MovingBoard {
     }
 
     public void drawMovingBoard(Graphics2D g) {
+        Font font = new Font("Georgia", Font.ITALIC, 30);
+        g.setFont(font);
+        String textF = "Press \"F\" to make one turn";
+        String textA = "Press \"A\" to turn autoplay on/off";
         drawBoardTiles(g);
         drawLayout(g);
         drawCenter(g);
         drawBases(g);
+        g.drawString(textF, (int) (screenWidth * 0.75), (int) (screenHeight * 0.2));
+        g.drawString(textA, (int) (screenWidth * 0.75), (int) (screenHeight * 0.25));
 
     }
 }
