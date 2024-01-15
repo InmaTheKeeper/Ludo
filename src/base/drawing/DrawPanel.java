@@ -85,6 +85,7 @@ public class DrawPanel extends JPanel {
 
     private void setupFigures() {
         int width = cellSize * 4;
+
         redFig[0] = new Figure((int) (startX - 5 * cellSize + width * 0.2), (int) (startY + 10 * cellSize + width * 0.2), width / 5, Color.red);
         redFig[1] = new Figure((int) (startX - 5 * cellSize + width * 0.2), (int) (startY + 10 * cellSize + width * 0.6), width / 5, Color.red);
         redFig[2] = new Figure((int) (startX - 5 * cellSize + width * 0.6), (int) (startY + 10 * cellSize + width * 0.2), width / 5, Color.red);
@@ -121,35 +122,36 @@ public class DrawPanel extends JPanel {
     }
 
     public void nextTurn() {
+        int offset = (int) (cellSize*0.1);
         int coordId;
         int pieceId;
         switch (curTurn) {
             case 1 -> {
                 pieceId = game.makeTurn(PlayerColor.RED);
                 coordId = game.getRedFigs()[pieceId].getCurTile().getTileId();
-                redFig[pieceId].setX(tileX[coordId]);
-                redFig[pieceId].setY(tileY[coordId]);
+                redFig[pieceId].setX(tileX[coordId]+offset);
+                redFig[pieceId].setY(tileY[coordId]+offset);
                 curTurn++;
             }
             case 2 -> {
                 pieceId = game.makeTurn(PlayerColor.YELLOW);
                 coordId = game.getYellowFigs()[pieceId].getCurTile().getTileId();
-                yellowFig[pieceId].setX(tileX[coordId]);
-                yellowFig[pieceId].setY(tileY[coordId]);
+                yellowFig[pieceId].setX(tileX[coordId]+offset);
+                yellowFig[pieceId].setY(tileY[coordId]+offset);
                 curTurn++;
             }
             case 3 -> {
                 pieceId = game.makeTurn(PlayerColor.GREEN);
                 coordId = game.getGreenFigs()[pieceId].getCurTile().getTileId();
-                greenFig[pieceId].setX(tileX[coordId]);
-                greenFig[pieceId].setY(tileY[coordId]);
+                greenFig[pieceId].setX(tileX[coordId]+offset);
+                greenFig[pieceId].setY(tileY[coordId]+offset);
                 curTurn++;
             }
             case 4 -> {
                 pieceId = game.makeTurn(PlayerColor.BLUE);
                 coordId = game.getBlueFigs()[pieceId].getCurTile().getTileId();
-                blueFig[pieceId].setX(tileX[coordId]);
-                blueFig[pieceId].setY(tileY[coordId]);
+                blueFig[pieceId].setX(tileX[coordId]+offset);
+                blueFig[pieceId].setY(tileY[coordId]+offset);
                 curTurn = 1;
             }
         }

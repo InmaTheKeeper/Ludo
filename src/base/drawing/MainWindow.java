@@ -22,10 +22,9 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
     @Override
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
-        System.out.println("key pressed");
         if (c == 'f' || c == 'F') {
             dp.nextTurn();
-            System.out.println("F pressed");
+            System.out.println("F pressed\nMade physical turn");
         }
         if (c == 'a' || c == 'A') {
             isAuto = !isAuto;
