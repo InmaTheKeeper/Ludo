@@ -9,6 +9,10 @@ public class GamePiece {
         this.currentTile = currentTile;
     }
 
+    public PlayerColor getClr() {
+        return clr;
+    }
+
     public GameBoard.GameTile getCurTile() {
         return currentTile;
     }

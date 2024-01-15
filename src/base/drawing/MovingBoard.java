@@ -176,12 +176,14 @@ public class MovingBoard {
         g.setFont(font);
         String textF = "Press \"F\" to make one turn";
         String textA = "Press \"A\" to turn autoplay on/off";
+        String textESC = "Press \"ESC\" to close application";
         drawBoardTiles(g);
         drawLayout(g);
         drawCenter(g);
         drawBases(g);
         g.drawString(textF, (int) (screenWidth * 0.75), (int) (screenHeight * 0.2));
         g.drawString(textA, (int) (screenWidth * 0.75), (int) (screenHeight * 0.25));
+        g.drawString(textESC, (int) (screenWidth * 0.75), (int) (screenHeight * 0.3));
 
     }
 }

@@ -1,4 +1,5 @@
 package base.game;
+
 public class GameBoard {
     BaseTile[] bases = {new BaseTile(PlayerColor.RED), new BaseTile(PlayerColor.GREEN), new BaseTile(PlayerColor.YELLOW), new BaseTile(PlayerColor.BLUE)};
     PlayerColor[] colors = {PlayerColor.RED, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.BLUE};
@@ -42,12 +43,34 @@ public class GameBoard {
     }
 
     public static class SlottedTile extends GameTile {
-        protected GameTile slot1;
-        protected GameTile slot2;
+        protected GamePiece slot1;
+        protected GamePiece slot2;
 
         public SlottedTile() {
             super();
+        }
 
+        public void setSlot1(GamePiece slot1) {
+            this.slot1 = slot1;
+        }
+
+        public void setSlot2(GamePiece slot2) {
+            this.slot2 = slot2;
+        }
+
+        public GamePiece getSlot1() {
+            return slot1;
+        }
+
+        public GamePiece getSlot2() {
+            return slot2;
+        }
+
+        public boolean isBlocked() {
+            if (slot1 != null && slot2 != null) {
+                return slot1.getClr().equals(slot2.getClr());
+            }
+            return false;
         }
     }
 

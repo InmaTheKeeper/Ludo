@@ -1,10 +1,7 @@
 package base.drawing;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class MainWindow extends JFrame implements KeyListener, ActionListener {
     private Timer timer;
@@ -30,11 +27,16 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
             isAuto = !isAuto;
             System.out.println("A pressed, isAuto = " + isAuto);
         }
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        int code = e.getKeyCode();
+        if (code == KeyEvent.VK_ESCAPE) {
+            timer.stop();
+            dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
     }
 
     @Override
