@@ -1,6 +1,5 @@
 package base;
 
-import base.drawing.DrawPanel;
 import base.drawing.MainWindow;
 
 import javax.swing.*;
@@ -13,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         MainWindow mw = new MainWindow();
-        mw.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        mw.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mw.setSize(screenWidth, screenHeight);
         mw.setVisible(true);
     }
