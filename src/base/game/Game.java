@@ -10,6 +10,10 @@ public class Game {
     private GamePiece[] blue = new GamePiece[4];
     private Random rnd = new Random();
     private int sixCounter;
+    public int redHomeCounter = 0;
+    public int greenHomeCounter = 0;
+    public int yellowHomeCounter = 0;
+    public int blueHomeCounter = 0;
 
     public Game() {
         //создаем поле
@@ -48,6 +52,7 @@ public class Game {
         int n = rnd.nextInt(1, 7);
         System.out.println("Rolled " + n);
         int rndPieceId = rnd.nextInt(0, 4);
+        //TODO: сделать 2 функции для поиска фигруок на/вне базы, чтобы сократить циклы for
         switch (clr) {
             case RED:
                 if (n == 6) {

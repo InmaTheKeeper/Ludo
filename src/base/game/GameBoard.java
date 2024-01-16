@@ -24,7 +24,8 @@ public class GameBoard {
     public static class GameTile {
         int id;
         static int counter = 0;
-        GameTile nextTile;
+        protected GameTile nextTile;
+        protected GamePiece slot1, slot2;
 
         public GameTile() {
             id = counter;
@@ -40,14 +41,12 @@ public class GameBoard {
             return id;
         }
 
-    }
+        public GamePiece getSlot1() {
+            return slot1;
+        }
 
-    public static class SlottedTile extends GameTile {
-        protected GamePiece slot1;
-        protected GamePiece slot2;
-
-        public SlottedTile() {
-            super();
+        public GamePiece getSlot2() {
+            return slot2;
         }
 
         public void setSlot1(GamePiece slot1) {
@@ -58,26 +57,15 @@ public class GameBoard {
             this.slot2 = slot2;
         }
 
-        public GamePiece getSlot1() {
-            return slot1;
-        }
-
-        public GamePiece getSlot2() {
-            return slot2;
-        }
-
-        public boolean isBlocked() {
-            if (slot1 != null && slot2 != null) {
-                return slot1.getClr().equals(slot2.getClr());
-            }
-            return false;
+        protected boolean isBlocked() {
+            return (slot1 != null && slot2 != null && slot1.getClr().equals(slot2.getClr()));
         }
     }
 
-    //TODO сделать класс со слотами наследник GameTile и наследовать его всем кроме баз, потому что им слотыне нужны
     static class BaseTile extends GameTile {
         PlayerColor clr;
         protected int figAmount;
+        protected GamePiece slot3, slot4;
 
         public BaseTile(PlayerColor clr) {
             super();
@@ -85,19 +73,36 @@ public class GameBoard {
             figAmount = 4;
         }
 
-        public int getFigAmount() {
+        protected int getFigAmount() {
             return figAmount;
         }
+
+        protected GamePiece getSlot3() {
+            return slot3;
+        }
+
+        protected GamePiece getSlot4() {
+            return slot4;
+        }
+
+        protected void setSlot3(GamePiece slot3) {
+            this.slot3 = slot3;
+        }
+
+        protected void setSlot4(GamePiece slot4) {
+            this.slot4 = slot4;
+        }
+
     }
 
-    private static class Pathway extends SlottedTile {
+    private static class Pathway extends GameTile {
         public Pathway() {
             super();
         }
 
     }
 
-    protected static class EntryTile extends SlottedTile {
+    protected static class EntryTile extends GameTile {
         protected GameTile nextEntry;
         PlayerColor clr;
 

@@ -34,7 +34,6 @@ public class DrawPanel extends JPanel {
     private int base3Y = (int) (startY + cellSize + (cellSize * 4) * 0.2);
     private int base4Y = (int) (startY + 10 * cellSize + (cellSize * 4) * 0.2);
 
-    //TODO добавить первые 4 координаты баз
     private final int[] tileX = {base1X, base2X, base3X, base4X, startX + cellSize, startX + cellSize, startX + cellSize, startX + cellSize, startX + cellSize, startX + cellSize,
             startX, startX, startX, startX, startX, startX, startX - cellSize, startX - 2 * cellSize, startX - 3 * cellSize,
             startX - 4 * cellSize, startX - 5 * cellSize, startX - 6 * cellSize, startX - 6 * cellSize, startX - 5 * cellSize,
