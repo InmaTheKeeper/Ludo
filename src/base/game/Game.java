@@ -1,5 +1,7 @@
 package base.game;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
@@ -10,7 +12,6 @@ public class Game {
     private GamePiece[] yellow = new GamePiece[4];
     private GamePiece[] blue = new GamePiece[4];
     private Random rnd = new Random();
-    private int sixCounter;
     public int redHomeCounter = 0;
     public int greenHomeCounter = 0;
     public int yellowHomeCounter = 0;
@@ -128,13 +129,9 @@ public class Game {
     }
 
     //Не сделано:
-    //TODO: 2) Повторение хода при шестерках
     //TODO: 3) Конец игры
     //TODO: 4) Обновленная отрисовка
-    public int makeTurn(PlayerColor clr) {
-        int n = rnd.nextInt(1, 7);
-        System.out.println("****************************");
-        System.out.println("Rolled " + n);
+    public int makeTurn(PlayerColor clr, int n) {
         int rndPieceId = rnd.nextInt(0, 4);
         int pieceId = -1;
         switch (clr) {
@@ -149,10 +146,12 @@ public class Game {
                 } else {
                     pieceId = findFigNotOnBase(PlayerColor.RED);
                     if (pieceId == -1) {
+                        System.out.println("Player: "+ clr + "\nTurn skipped");
+                        System.out.println("****************************");
                         break;
                     }
                 }
-                System.out.println("PieceId: " + pieceId);
+                System.out.println("PieceId: " + (pieceId+1) + "\nPlayer: " + clr);
                 red[pieceId].moveBy(n);
             }
             case GREEN -> {
@@ -166,10 +165,12 @@ public class Game {
                 } else {
                     pieceId = findFigNotOnBase(PlayerColor.GREEN);
                     if (pieceId == -1) {
+                        System.out.println("Player: "+ clr + "\nTurn skipped");
+                        System.out.println("****************************");
                         break;
                     }
                 }
-                System.out.println("PieceId: " + pieceId);
+                System.out.println("PieceId: " + (pieceId+1) + "\nPlayer: " + clr);
                 green[pieceId].moveBy(n);
             }
             case YELLOW -> {
@@ -183,10 +184,12 @@ public class Game {
                 } else {
                     pieceId = findFigNotOnBase(PlayerColor.YELLOW);
                     if (pieceId == -1) {
+                        System.out.println("Player: "+ clr + "\nTurn skipped");
+                        System.out.println("****************************");
                         break;
                     }
                 }
-                System.out.println("PieceId: " + pieceId);
+                System.out.println("PieceId: " + (pieceId+1) + "\nPlayer: " + clr);
                 yellow[pieceId].moveBy(n);
             }
             case BLUE -> {
@@ -200,10 +203,12 @@ public class Game {
                 } else {
                     pieceId = findFigNotOnBase(PlayerColor.BLUE);
                     if (pieceId == -1) {
+                        System.out.println("Player: "+ clr + "\nTurn skipped");
+                        System.out.println("****************************");
                         break;
                     }
                 }
-                System.out.println("PieceId: " + pieceId);
+                System.out.println("PieceId: " + (pieceId+1) + "\nPlayer: " + clr);
                 blue[pieceId].moveBy(n);
             }
         }

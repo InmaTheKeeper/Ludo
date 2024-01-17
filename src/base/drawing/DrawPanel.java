@@ -2,37 +2,40 @@ package base.drawing;
 
 import base.Main;
 import base.game.*;
+import org.w3c.dom.ls.LSOutput;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class DrawPanel extends JPanel {
     private Game game;
     private final int screenWidth = Main.screenWidth;
     private final int screenHeight = Main.screenHeight;
-    private MovingBoard mb;
+    private final MovingBoard mb;
     private Image bgd;
-    private JButton turnButton;
-    private Figure[] redFig = new Figure[4];
-    private Figure[] greenFig = new Figure[4];
-    private Figure[] yellowFig = new Figure[4];
-    private Figure[] blueFig = new Figure[4];
-    private int cellSize = (int) (screenHeight * 0.055);
+    private final JButton turnButton;
+    private final Random rnd = new Random();
+    private final Figure[] redFig = new Figure[4];
+    private final Figure[] greenFig = new Figure[4];
+    private final Figure[] yellowFig = new Figure[4];
+    private final Figure[] blueFig = new Figure[4];
+    private final int cellSize = (int) (screenHeight * 0.055);
     private int startX = (int) (screenWidth / 2 - 1.5 * cellSize);
     private int startY = screenHeight / 12;
-    private int curTurn = 1;
-    private int base1X = (int) (startX - 5 * cellSize + (cellSize * 4) * 0.2);
-    private int base2X = (int) (startX - 5 * cellSize + (cellSize * 4) * 0.2);
-    private int base3X = (int) (startX + 4 * cellSize + (cellSize * 4) * 0.2);
-    private int base4X = (int) (startX + 4 * cellSize + (cellSize * 4) * 0.2);
+    private int curTurn = 0;
+    private final int base1X = (int) (startX - 5 * cellSize + (cellSize * 4) * 0.2);
+    private final int base2X = (int) (startX - 5 * cellSize + (cellSize * 4) * 0.2);
+    private final int base3X = (int) (startX + 4 * cellSize + (cellSize * 4) * 0.2);
+    private final int base4X = (int) (startX + 4 * cellSize + (cellSize * 4) * 0.2);
 
-    private int base1Y = (int) (startY + 10 * cellSize + (cellSize * 4) * 0.2);
-    private int base2Y = (int) (startY + cellSize + (cellSize * 4) * 0.2);
-    private int base3Y = (int) (startY + cellSize + (cellSize * 4) * 0.2);
-    private int base4Y = (int) (startY + 10 * cellSize + (cellSize * 4) * 0.2);
+    private final int base1Y = (int) (startY + 10 * cellSize + (cellSize * 4) * 0.2);
+    private final int base2Y = (int) (startY + cellSize + (cellSize * 4) * 0.2);
+    private final int base3Y = (int) (startY + cellSize + (cellSize * 4) * 0.2);
+    private final int base4Y = (int) (startY + 10 * cellSize + (cellSize * 4) * 0.2);
 
     private final int[] tileX = {base1X, base2X, base3X, base4X, startX + cellSize, startX + cellSize, startX + cellSize, startX + cellSize, startX + cellSize, startX + cellSize,
             startX, startX, startX, startX, startX, startX, startX - cellSize, startX - 2 * cellSize, startX - 3 * cellSize,
@@ -124,45 +127,49 @@ public class DrawPanel extends JPanel {
         int offset = (int) (cellSize * 0.1);
         int coordId;
         int pieceId;
-        switch (curTurn) {
-            case 1 -> {
-                pieceId = game.makeTurn(PlayerColor.RED);
-                if (pieceId != -1) {
-                    coordId = game.getRedFigs()[pieceId].getCurTile().getTileId();
-                    redFig[pieceId].setX(tileX[coordId] + offset);
-                    redFig[pieceId].setY(tileY[coordId] + offset);
+        int n;
+        int sixCounter = 0;
+        do {
+            sixCounter++;
+            n = rnd.nextInt(1, 7);
+            System.out.println("Rolled: " + n);
+            switch (curTurn) {
+                case 0 -> {
+                    pieceId = game.makeTurn(PlayerColor.RED, n);
+                    if (pieceId != -1) {
+                        coordId = game.getRedFigs()[pieceId].getCurTile().getTileId();
+                        redFig[pieceId].setX(tileX[coordId] + offset);
+                        redFig[pieceId].setY(tileY[coordId] + offset);
+                    }
                 }
-                curTurn++;
-            }
-            case 2 -> {
-                pieceId = game.makeTurn(PlayerColor.YELLOW);
-                if (pieceId != -1) {
-                    coordId = game.getYellowFigs()[pieceId].getCurTile().getTileId();
-                    yellowFig[pieceId].setX(tileX[coordId] + offset);
-                    yellowFig[pieceId].setY(tileY[coordId] + offset);
+                case 1 -> {
+                    pieceId = game.makeTurn(PlayerColor.YELLOW, n);
+                    if (pieceId != -1) {
+                        coordId = game.getYellowFigs()[pieceId].getCurTile().getTileId();
+                        yellowFig[pieceId].setX(tileX[coordId] + offset);
+                        yellowFig[pieceId].setY(tileY[coordId] + offset);
+                    }
                 }
-                curTurn++;
+                case 2 -> {
+                    pieceId = game.makeTurn(PlayerColor.GREEN, n);
+                    if (pieceId != -1) {
+                        coordId = game.getGreenFigs()[pieceId].getCurTile().getTileId();
+                        greenFig[pieceId].setX(tileX[coordId] + offset);
+                        greenFig[pieceId].setY(tileY[coordId] + offset);
+                    }
+                }
+                case 3 -> {
+                    pieceId = game.makeTurn(PlayerColor.BLUE, n);
+                    if (pieceId != -1) {
+                        coordId = game.getBlueFigs()[pieceId].getCurTile().getTileId();
+                        blueFig[pieceId].setX(tileX[coordId] + offset);
+                        blueFig[pieceId].setY(tileY[coordId] + offset);
+                    }
+                }
             }
-            case 3 -> {
 
-                pieceId = game.makeTurn(PlayerColor.GREEN);
-                if (pieceId != -1) {
-                    coordId = game.getGreenFigs()[pieceId].getCurTile().getTileId();
-                    greenFig[pieceId].setX(tileX[coordId] + offset);
-                    greenFig[pieceId].setY(tileY[coordId] + offset);
-                }
-                curTurn++;
-            }
-            case 4 -> {
-                pieceId = game.makeTurn(PlayerColor.BLUE);
-                if (pieceId != -1) {
-                    coordId = game.getBlueFigs()[pieceId].getCurTile().getTileId();
-                    blueFig[pieceId].setX(tileX[coordId] + offset);
-                    blueFig[pieceId].setY(tileY[coordId] + offset);
-                }
-                curTurn = 1;
-            }
-        }
+        } while (n == 6 && sixCounter < 3);
+        curTurn = (curTurn + 1) % 4;
         repaint();
     }
 }
