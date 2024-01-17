@@ -12,7 +12,7 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
         addKeyListener(this);
         dp = new DrawPanel();
         this.add(dp);
-        timer = new Timer(750, this);
+        timer = new Timer(500, this);
         timer.start();
     }
 

@@ -127,14 +127,20 @@ public class Game {
         return pieceId;
     }
 
+    //Не сделано:
+    //TODO: 2) Повторение хода при шестерках
+    //TODO: 3) Конец игры
+    //TODO: 4) Обновленная отрисовка
     public int makeTurn(PlayerColor clr) {
         int n = rnd.nextInt(1, 7);
+        System.out.println("****************************");
         System.out.println("Rolled " + n);
         int rndPieceId = rnd.nextInt(0, 4);
-        int pieceId;
+        int pieceId = -1;
         switch (clr) {
             case RED -> {
                 if (n == 6) {
+                    n = 1;
                     if (GameBoard.bases[0].getFigAmount() != 0) {
                         pieceId = findFigOnBase(PlayerColor.RED);
                     } else {
@@ -146,10 +152,12 @@ public class Game {
                         break;
                     }
                 }
+                System.out.println("PieceId: " + pieceId);
                 red[pieceId].moveBy(n);
             }
             case GREEN -> {
                 if (n == 6) {
+                    n = 1;
                     if (GameBoard.bases[1].getFigAmount() != 0) {
                         pieceId = findFigOnBase(PlayerColor.GREEN);
                     } else {
@@ -161,10 +169,12 @@ public class Game {
                         break;
                     }
                 }
+                System.out.println("PieceId: " + pieceId);
                 green[pieceId].moveBy(n);
             }
             case YELLOW -> {
                 if (n == 6) {
+                    n = 1;
                     if (GameBoard.bases[2].getFigAmount() != 0) {
                         pieceId = findFigOnBase(PlayerColor.YELLOW);
                     } else {
@@ -176,10 +186,12 @@ public class Game {
                         break;
                     }
                 }
+                System.out.println("PieceId: " + pieceId);
                 yellow[pieceId].moveBy(n);
             }
             case BLUE -> {
                 if (n == 6) {
+                    n = 1;
                     if (GameBoard.bases[3].getFigAmount() != 0) {
                         pieceId = findFigOnBase(PlayerColor.BLUE);
                     } else {
@@ -191,9 +203,10 @@ public class Game {
                         break;
                     }
                 }
+                System.out.println("PieceId: " + pieceId);
                 blue[pieceId].moveBy(n);
             }
         }
-        return rndPieceId;
+        return pieceId;
     }
 }
