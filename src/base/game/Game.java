@@ -1,5 +1,6 @@
 package base.game;
 
+import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
 public class Game {
@@ -48,102 +49,151 @@ public class Game {
         }
     }
 
+    private int findFigOnBase(PlayerColor clr) {
+        int pieceId = -1;
+        switch (clr) {
+            case RED -> {
+                for (int i = 0; i < red.length; i++) {
+                    if (red[i].isOnBase()) {
+                        pieceId = i;
+                    }
+
+                }
+            }
+            case GREEN -> {
+                for (int i = 0; i < green.length; i++) {
+                    if (green[i].isOnBase()) {
+                        pieceId = i;
+                    }
+
+                }
+            }
+            case YELLOW -> {
+                for (int i = 0; i < yellow.length; i++) {
+                    if (yellow[i].isOnBase()) {
+                        pieceId = i;
+                    }
+
+                }
+            }
+            case BLUE -> {
+                for (int i = 0; i < blue.length; i++) {
+                    if (blue[i].isOnBase()) {
+                        pieceId = i;
+                    }
+
+                }
+            }
+        }
+        return pieceId;
+    }
+
+    private int findFigNotOnBase(PlayerColor clr) {
+        int pieceId = -1;
+        switch (clr) {
+            case RED -> {
+                for (int i = 0; i < red.length; i++) {
+                    if (!red[i].isOnBase()) {
+                        pieceId = i;
+                    }
+
+                }
+            }
+            case GREEN -> {
+                for (int i = 0; i < green.length; i++) {
+                    if (!green[i].isOnBase()) {
+                        pieceId = i;
+                    }
+
+                }
+            }
+            case YELLOW -> {
+                for (int i = 0; i < yellow.length; i++) {
+                    if (!yellow[i].isOnBase()) {
+                        pieceId = i;
+                    }
+
+                }
+            }
+            case BLUE -> {
+                for (int i = 0; i < blue.length; i++) {
+                    if (!blue[i].isOnBase()) {
+                        pieceId = i;
+                    }
+
+                }
+            }
+        }
+        return pieceId;
+    }
+
     public int makeTurn(PlayerColor clr) {
         int n = rnd.nextInt(1, 7);
         System.out.println("Rolled " + n);
         int rndPieceId = rnd.nextInt(0, 4);
-        //TODO: сделать 2 функции для поиска фигруок на/вне базы, чтобы сократить циклы for
+        int pieceId;
         switch (clr) {
-            case RED:
+            case RED -> {
                 if (n == 6) {
                     if (GameBoard.bases[0].getFigAmount() != 0) {
-                        for (int i = 0; i < red.length; i++) {
-                            if (red[i].isOnBase()) {
-                                red[i].moveBy(n);
-                                return i;
-                            }
-                        }
+                        pieceId = findFigOnBase(PlayerColor.RED);
                     } else {
-                        red[rndPieceId].moveBy(n);
-                        return rndPieceId;
+                        pieceId = rndPieceId;
                     }
                 } else {
-                    for (int i = 0; i < red.length; i++) {
-                        if (!red[i].isOnBase()) {
-                            red[i].moveBy(n);
-                            return i;
-                        }
+                    pieceId = findFigNotOnBase(PlayerColor.RED);
+                    if (pieceId == -1) {
+                        break;
                     }
                 }
-                break;
-            case GREEN:
+                red[pieceId].moveBy(n);
+            }
+            case GREEN -> {
                 if (n == 6) {
                     if (GameBoard.bases[1].getFigAmount() != 0) {
-                        for (int i = 0; i < green.length; i++) {
-                            if (green[i].isOnBase()) {
-                                green[i].moveBy(n);
-                                return i;
-                            }
-                        }
+                        pieceId = findFigOnBase(PlayerColor.GREEN);
                     } else {
-                        green[rndPieceId].moveBy(n);
-                        return rndPieceId;
+                        pieceId = rndPieceId;
                     }
                 } else {
-                    for (int i = 0; i < green.length; i++) {
-                        if (!green[i].isOnBase()) {
-                            green[i].moveBy(n);
-                            return i;
-                        }
+                    pieceId = findFigNotOnBase(PlayerColor.GREEN);
+                    if (pieceId == -1) {
+                        break;
                     }
                 }
-                break;
-            case YELLOW:
+                green[pieceId].moveBy(n);
+            }
+            case YELLOW -> {
                 if (n == 6) {
                     if (GameBoard.bases[2].getFigAmount() != 0) {
-                        for (int i = 0; i < yellow.length; i++) {
-                            if (yellow[i].isOnBase()) {
-                                yellow[i].moveBy(n);
-                                return i;
-                            }
-                        }
+                        pieceId = findFigOnBase(PlayerColor.YELLOW);
                     } else {
-                        yellow[rndPieceId].moveBy(n);
-                        return rndPieceId;
+                        pieceId = rndPieceId;
                     }
                 } else {
-                    for (int i = 0; i < yellow.length; i++) {
-                        if (!yellow[i].isOnBase()) {
-                            yellow[i].moveBy(n);
-                            return i;
-                        }
+                    pieceId = findFigNotOnBase(PlayerColor.YELLOW);
+                    if (pieceId == -1) {
+                        break;
                     }
                 }
-                break;
-            case BLUE:
+                yellow[pieceId].moveBy(n);
+            }
+            case BLUE -> {
                 if (n == 6) {
                     if (GameBoard.bases[3].getFigAmount() != 0) {
-                        for (int i = 0; i < blue.length; i++) {
-                            if (blue[i].isOnBase()) {
-                                blue[i].moveBy(n);
-                                return i;
-                            }
-                        }
+                        pieceId = findFigOnBase(PlayerColor.BLUE);
                     } else {
-                        blue[rndPieceId].moveBy(n);
-                        return rndPieceId;
+                        pieceId = rndPieceId;
                     }
                 } else {
-                    for (int i = 0; i < blue.length; i++) {
-                        if (!blue[i].isOnBase()) {
-                            blue[i].moveBy(n);
-                            return i;
-                        }
+                    pieceId = findFigNotOnBase(PlayerColor.BLUE);
+                    if (pieceId == -1) {
+                        break;
                     }
                 }
-                break;
+                blue[pieceId].moveBy(n);
+            }
         }
-
         return rndPieceId;
     }
 }
