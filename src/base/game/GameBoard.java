@@ -95,11 +95,11 @@ public class GameBoard {
 
     }
 
-    protected  class HomeTile extends BaseTile{
+   /* protected class HomeTile extends BaseTile {
         public HomeTile(PlayerColor clr) {
             super(clr);
         }
-    }
+    }*/
 
 
     private static class Pathway extends GameTile {

@@ -188,7 +188,6 @@ public class Game {
             case RED -> {
                 if (n == 6) {
                     if (GameBoard.bases[0].getFigAmount() != 0) {
-                        n = 1;
                         pieceId = findFigOnBase(PlayerColor.RED);
                     } else {
                         pieceId = rndPieceId;
@@ -206,7 +205,6 @@ public class Game {
             case GREEN -> {
                 if (n == 6) {
                     if (GameBoard.bases[1].getFigAmount() != 0) {
-                        n = 1;
                         pieceId = findFigOnBase(PlayerColor.GREEN);
                     } else {
                         pieceId = rndPieceId;
@@ -224,7 +222,6 @@ public class Game {
             case YELLOW -> {
                 if (n == 6) {
                     if (GameBoard.bases[2].getFigAmount() != 0) {
-                        n = 1;
                         pieceId = findFigOnBase(PlayerColor.YELLOW);
                     } else {
                         pieceId = rndPieceId;
@@ -242,7 +239,6 @@ public class Game {
             case BLUE -> {
                 if (n == 6) {
                     if (GameBoard.bases[3].getFigAmount() != 0) {
-                        n = 1;
                         pieceId = findFigOnBase(PlayerColor.BLUE);
                     } else {
                         pieceId = rndPieceId;

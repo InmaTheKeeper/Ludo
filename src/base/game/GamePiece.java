@@ -30,6 +30,7 @@ public class GamePiece {
     }
 
     public void moveBy(int n) {
+        GameBoard.GameTile startTile = currentTile;
         if (n > toHome) {
             System.out.println("Overthrown home");
             return;
@@ -47,13 +48,16 @@ public class GamePiece {
             } else if (currentTile instanceof GameBoard.BaseTile baseTile) {
                 baseTile.figAmount--;
                 currentTile = currentTile.nextTile;
+                break;
             } else if (currentTile instanceof GameBoard.EntryTile entryTile && entryTile.clr == clr) {
                 currentTile = entryTile.nextEntry;
             } else {
                 currentTile = currentTile.nextTile;
             }
-            toHome--;
-            System.out.println("Current tile: " + currentTile);
+            if (startTile != currentTile) {
+                toHome--;
+            }
+            System.out.println("Moved to: " + currentTile);
         }
         checkTileSlots(currentTile);
     }
@@ -62,14 +66,14 @@ public class GamePiece {
         if (gt.getSlot1() == null) {
             gt.setSlot1(this);
             if (gt.getSlot2() != null && gt.getSlot2().getClr() != this.clr) {
-                System.out.println("Killed another piece");
+                System.out.println("Killed piece in slot2");
                 moveTileToBase(gt.getSlot2());
                 gt.setSlot2(null);
             }
         } else if (gt.getSlot2() == null) {
             gt.setSlot2(this);
             if (gt.getSlot1() != null && gt.getSlot1().getClr() != this.clr) {
-                System.out.println("Killed another piece");
+                System.out.println("Killed piece in slot1");
                 moveTileToBase(gt.getSlot1());
                 gt.setSlot2(null);
             }
@@ -83,21 +87,25 @@ public class GamePiece {
             case RED -> {
                 gt = GameBoard.bases[0];
                 piece.currentTile = gt;
+                piece.toHome = 57;
                 gt.figAmount++;
             }
             case GREEN -> {
                 gt = GameBoard.bases[1];
                 piece.currentTile = gt;
+                piece.toHome = 57;
                 gt.figAmount++;
             }
             case YELLOW -> {
                 gt = GameBoard.bases[2];
                 piece.currentTile = gt;
+                piece.toHome = 57;
                 gt.figAmount++;
             }
             case BLUE -> {
                 gt = GameBoard.bases[3];
                 piece.currentTile = gt;
+                piece.toHome = 57;
                 gt.figAmount++;
             }
         }
