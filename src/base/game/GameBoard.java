@@ -57,7 +57,7 @@ public class GameBoard {
             this.slot2 = slot2;
         }
 
-        protected boolean isBlocked() {
+        public boolean isBlocked() {
             return (slot1 != null && slot2 != null && slot1.getClr().equals(slot2.getClr()));
         }
     }

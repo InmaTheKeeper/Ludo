@@ -59,9 +59,10 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
         }
 
         if (winner != null) {
+            System.out.println("We got a Winner!!!");
             timer.stop();
             gameFinished = true;
-            System.out.println("Winner is: " + winner);
+            System.out.println("And the winner is: " + winner);
         }
 
     }

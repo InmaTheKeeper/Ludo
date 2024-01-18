@@ -11,13 +11,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
+import static base.Main.screenHeight;
+import static base.Main.screenWidth;
+
 public class DrawPanel extends JPanel {
     private Game game;
     private final int screenWidth = Main.screenWidth;
     private final int screenHeight = Main.screenHeight;
     private final MovingBoard mb;
     private Image bgd;
-    private final JButton turnButton;
     private final Random rnd = new Random();
     private final Figure[] redFig = new Figure[4];
     private final Figure[] greenFig = new Figure[4];
@@ -64,7 +66,6 @@ public class DrawPanel extends JPanel {
             startY + 10 * cellSize, startY + 11 * cellSize, startY + 12 * cellSize, startY + 13 * cellSize, startY + 14 * cellSize};
 
     public DrawPanel() throws IOException {
-        turnButton = new JButton();
         try {
             bgd = ImageIO.read(new File("images/bgd.jpg"));
         } catch (IOException e) {
@@ -86,27 +87,27 @@ public class DrawPanel extends JPanel {
     }
 
     private void setupFigures() {
-        int width = cellSize * 4;
+        int width = cellSize * 3;
 
-        redFig[0] = new Figure((int) (startX - 5 * cellSize + width * 0.2), (int) (startY + 10 * cellSize + width * 0.2), width / 5, Color.red);
-        redFig[1] = new Figure((int) (startX - 5 * cellSize + width * 0.2), (int) (startY + 10 * cellSize + width * 0.6), width / 5, Color.red);
-        redFig[2] = new Figure((int) (startX - 5 * cellSize + width * 0.6), (int) (startY + 10 * cellSize + width * 0.2), width / 5, Color.red);
-        redFig[3] = new Figure((int) (startX - 5 * cellSize + width * 0.6), (int) (startY + 10 * cellSize + width * 0.6), width / 5, Color.red);
+        redFig[0] = new Figure((int) (startX - 4.5 * cellSize + width * 0.2), (int) (startY + 10.5 * cellSize + width * 0.2), width / 5, Color.red);
+        redFig[1] = new Figure((int) (startX - 4.5 * cellSize + width * 0.2), (int) (startY + 10.5 * cellSize + width * 0.6), width / 5, Color.red);
+        redFig[2] = new Figure((int) (startX - 4.5 * cellSize + width * 0.6), (int) (startY + 10.5 * cellSize + width * 0.2), width / 5, Color.red);
+        redFig[3] = new Figure((int) (startX - 4.5 * cellSize + width * 0.6), (int) (startY + 10.5 * cellSize + width * 0.6), width / 5, Color.red);
 
-        greenFig[0] = new Figure((int) (startX - 5 * cellSize + width * 0.2), (int) (startY + cellSize + width * 0.2), width / 5, Color.green);
-        greenFig[1] = new Figure((int) (startX - 5 * cellSize + width * 0.2), (int) (startY + cellSize + width * 0.6), width / 5, Color.green);
-        greenFig[2] = new Figure((int) (startX - 5 * cellSize + width * 0.6), (int) (startY + cellSize + width * 0.2), width / 5, Color.green);
-        greenFig[3] = new Figure((int) (startX - 5 * cellSize + width * 0.6), (int) (startY + cellSize + width * 0.6), width / 5, Color.green);
+        greenFig[0] = new Figure((int) (startX - 4.5 * cellSize + width * 0.2), (int) (startY + 1.5 * cellSize + width * 0.2), width / 5, Color.green);
+        greenFig[1] = new Figure((int) (startX - 4.5 * cellSize + width * 0.2), (int) (startY + 1.5 * cellSize + width * 0.6), width / 5, Color.green);
+        greenFig[2] = new Figure((int) (startX - 4.5 * cellSize + width * 0.6), (int) (startY + 1.5 * cellSize + width * 0.2), width / 5, Color.green);
+        greenFig[3] = new Figure((int) (startX - 4.5 * cellSize + width * 0.6), (int) (startY + 1.5 * cellSize + width * 0.6), width / 5, Color.green);
 
-        yellowFig[0] = new Figure((int) (startX + 4 * cellSize + width * 0.2), (int) (startY + cellSize + width * 0.2), width / 5, Color.yellow);
-        yellowFig[1] = new Figure((int) (startX + 4 * cellSize + width * 0.2), (int) (startY + cellSize + width * 0.6), width / 5, Color.yellow);
-        yellowFig[2] = new Figure((int) (startX + 4 * cellSize + width * 0.6), (int) (startY + cellSize + width * 0.2), width / 5, Color.yellow);
-        yellowFig[3] = new Figure((int) (startX + 4 * cellSize + width * 0.6), (int) (startY + cellSize + width * 0.6), width / 5, Color.yellow);
+        yellowFig[0] = new Figure((int) (startX + 4.5 * cellSize + width * 0.2), (int) (startY + 1.5 * cellSize + width * 0.2), width / 5, Color.yellow);
+        yellowFig[1] = new Figure((int) (startX + 4.5 * cellSize + width * 0.2), (int) (startY + 1.5 * cellSize + width * 0.6), width / 5, Color.yellow);
+        yellowFig[2] = new Figure((int) (startX + 4.5 * cellSize + width * 0.6), (int) (startY + 1.5 * cellSize + width * 0.2), width / 5, Color.yellow);
+        yellowFig[3] = new Figure((int) (startX + 4.5 * cellSize + width * 0.6), (int) (startY + 1.5 * cellSize + width * 0.6), width / 5, Color.yellow);
 
-        blueFig[0] = new Figure((int) (startX + 4 * cellSize + width * 0.2), (int) (startY + 10 * cellSize + width * 0.2), width / 5, Color.blue);
-        blueFig[1] = new Figure((int) (startX + 4 * cellSize + width * 0.2), (int) (startY + 10 * cellSize + width * 0.6), width / 5, Color.blue);
-        blueFig[2] = new Figure((int) (startX + 4 * cellSize + width * 0.6), (int) (startY + 10 * cellSize + width * 0.2), width / 5, Color.blue);
-        blueFig[3] = new Figure((int) (startX + 4 * cellSize + width * 0.6), (int) (startY + 10 * cellSize + width * 0.6), width / 5, Color.blue);
+        blueFig[0] = new Figure((int) (startX + 4.5 * cellSize + width * 0.2), (int) (startY + 10.5 * cellSize + width * 0.2), width / 5, Color.blue);
+        blueFig[1] = new Figure((int) (startX + 4.5 * cellSize + width * 0.2), (int) (startY + 10.5 * cellSize + width * 0.6), width / 5, Color.blue);
+        blueFig[2] = new Figure((int) (startX + 4.5 * cellSize + width * 0.6), (int) (startY + 10.5 * cellSize + width * 0.2), width / 5, Color.blue);
+        blueFig[3] = new Figure((int) (startX + 4.5 * cellSize + width * 0.6), (int) (startY + 10.5 * cellSize + width * 0.6), width / 5, Color.blue);
 
     }
 
@@ -117,6 +118,19 @@ public class DrawPanel extends JPanel {
             yellowFig[i].drawFigure(i + 1, g);
             blueFig[i].drawFigure(i + 1, g);
         }
+    }
+
+    public void drawWinnerScreen(Graphics2D g, PlayerColor clr) {
+        int rectX = (int) (screenWidth * 0.4);
+        int rectY = (int) (screenHeight * 0.3);
+        int rectWidth = (int) (screenWidth * 0.2);
+        int rectHeight = (int) (screenHeight * 0.3);
+        g.setColor(new Color(229, 152, 18));
+        g.fillRect(rectX, rectY, rectWidth, rectHeight);
+        Font font = new Font("Georgia", Font.ITALIC, 30);
+        g.setFont(font);
+        String text = "The winner is: " + clr;
+        g.drawString(text, rectX + rectWidth / 2, rectY + rectHeight / 2);
     }
 
     public void startGame() {
@@ -138,36 +152,55 @@ public class DrawPanel extends JPanel {
                     pieceId = game.makeTurn(PlayerColor.RED, n);
                     if (pieceId != -1) {
                         coordId = game.getRedFigs()[pieceId].getCurTile().getTileId();
-                        redFig[pieceId].setX(tileX[coordId] + offset);
-                        redFig[pieceId].setY(tileY[coordId] + offset);
+                        if (game.getRedFigs()[pieceId].getCurTile().isBlocked()) {
+                            redFig[pieceId].setX(tileX[coordId] + 5 * offset);
+                            redFig[pieceId].setY(tileY[coordId] + offset);
+                        } else {
+                            redFig[pieceId].setX(tileX[coordId]);
+                            redFig[pieceId].setY(tileY[coordId] + offset);
+                        }
                     }
                 }
                 case 1 -> {
-                    pieceId = game.makeTurn(PlayerColor.YELLOW, n);
-                    if (pieceId != -1) {
-                        coordId = game.getYellowFigs()[pieceId].getCurTile().getTileId();
-                        yellowFig[pieceId].setX(tileX[coordId] + offset);
-                        yellowFig[pieceId].setY(tileY[coordId] + offset);
-                    }
-                }
-                case 2 -> {
                     pieceId = game.makeTurn(PlayerColor.GREEN, n);
                     if (pieceId != -1) {
                         coordId = game.getGreenFigs()[pieceId].getCurTile().getTileId();
-                        greenFig[pieceId].setX(tileX[coordId] + offset);
-                        greenFig[pieceId].setY(tileY[coordId] + offset);
+                        if (game.getGreenFigs()[pieceId].getCurTile().isBlocked()) {
+                            greenFig[pieceId].setX(tileX[coordId] + 5 * offset);
+                            greenFig[pieceId].setY(tileY[coordId] + offset);
+                        } else {
+                            greenFig[pieceId].setX(tileX[coordId]);
+                            greenFig[pieceId].setY(tileY[coordId] + offset);
+                        }
+                    }
+                }
+                case 2 -> {
+                    pieceId = game.makeTurn(PlayerColor.YELLOW, n);
+                    if (pieceId != -1) {
+                        coordId = game.getYellowFigs()[pieceId].getCurTile().getTileId();
+                        if (game.getYellowFigs()[pieceId].getCurTile().isBlocked()) {
+                            yellowFig[pieceId].setX(tileX[coordId] + 5 * offset);
+                            yellowFig[pieceId].setY(tileY[coordId] + offset);
+                        } else {
+                            yellowFig[pieceId].setX(tileX[coordId]);
+                            yellowFig[pieceId].setY(tileY[coordId] + offset);
+                        }
                     }
                 }
                 case 3 -> {
                     pieceId = game.makeTurn(PlayerColor.BLUE, n);
                     if (pieceId != -1) {
                         coordId = game.getBlueFigs()[pieceId].getCurTile().getTileId();
-                        blueFig[pieceId].setX(tileX[coordId] + offset);
-                        blueFig[pieceId].setY(tileY[coordId] + offset);
+                        if (game.getBlueFigs()[pieceId].getCurTile().isBlocked()) {
+                            blueFig[pieceId].setX(tileX[coordId] + 5 * offset);
+                            blueFig[pieceId].setY(tileY[coordId] + offset);
+                        } else {
+                            blueFig[pieceId].setX(tileX[coordId]);
+                            blueFig[pieceId].setY(tileY[coordId] + offset);
+                        }
                     }
                 }
             }
-
         } while (n == 6 && sixCounter < 3);
         curTurn = (curTurn + 1) % 4;
         repaint();
