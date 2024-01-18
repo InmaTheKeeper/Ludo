@@ -62,7 +62,7 @@ public class GameBoard {
         }
     }
 
-    static class BaseTile extends GameTile {
+    protected static class BaseTile extends GameTile {
         PlayerColor clr;
         protected int figAmount;
         protected GamePiece slot3, slot4;
@@ -94,6 +94,13 @@ public class GameBoard {
         }
 
     }
+
+    protected  class HomeTile extends BaseTile{
+        public HomeTile(PlayerColor clr) {
+            super(clr);
+        }
+    }
+
 
     private static class Pathway extends GameTile {
         public Pathway() {

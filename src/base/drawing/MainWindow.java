@@ -1,5 +1,8 @@
 package base.drawing;
 
+import base.game.Game;
+import base.game.PlayerColor;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -7,6 +10,10 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
     private Timer timer;
     private final DrawPanel dp;
     private boolean isAuto = false;
+
+    private PlayerColor winner = null;
+
+    private boolean gameFinished = false;
 
     public MainWindow() throws Exception {
         addKeyListener(this);
@@ -31,8 +38,9 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
             isAuto = !isAuto;
             //System.out.println("A pressed, isAuto = " + isAuto);
         }
-        if (code == KeyEvent.VK_F) {
+        if (code == KeyEvent.VK_F && !gameFinished) {
             dp.nextTurn();
+            winner = Game.getWinner();
             //System.out.println("F pressed\nMade physical turn");
         }
     }
@@ -44,9 +52,17 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (isAuto) {
+        if (isAuto && !gameFinished) {
             dp.nextTurn();
+            winner = Game.getWinner();
             System.out.println("Made Auto turn");
         }
+
+        if (winner != null) {
+            timer.stop();
+            gameFinished = true;
+            System.out.println("Winner is: " + winner);
+        }
+
     }
 }

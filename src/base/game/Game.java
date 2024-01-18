@@ -1,8 +1,5 @@
 package base.game;
 
-import org.w3c.dom.ls.LSOutput;
-
-import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
 public class Game {
@@ -12,10 +9,10 @@ public class Game {
     private GamePiece[] yellow = new GamePiece[4];
     private GamePiece[] blue = new GamePiece[4];
     private Random rnd = new Random();
-    public int redHomeCounter = 0;
-    public int greenHomeCounter = 0;
-    public int yellowHomeCounter = 0;
-    public int blueHomeCounter = 0;
+    private static int redHomeCounter = 0;
+    private static int greenHomeCounter = 0;
+    private static int yellowHomeCounter = 0;
+    private static int blueHomeCounter = 0;
 
     public Game() {
         //создаем поле
@@ -40,6 +37,21 @@ public class Game {
         return blue;
     }
 
+    public int getBlueHomeCounter() {
+        return blueHomeCounter;
+    }
+
+    public int getGreenHomeCounter() {
+        return greenHomeCounter;
+    }
+
+    public int getRedHomeCounter() {
+        return redHomeCounter;
+    }
+
+    public int getYellowHomeCounter() {
+        return yellowHomeCounter;
+    }
 
     private void spawnFigures() {
         for (int i = 0; i < 4; i++) {
@@ -94,7 +106,7 @@ public class Game {
         switch (clr) {
             case RED -> {
                 for (int i = 0; i < red.length; i++) {
-                    if (!red[i].isOnBase()) {
+                    if (!red[i].isOnBase() && !red[i].isHome()) {
                         pieceId = i;
                     }
 
@@ -102,7 +114,7 @@ public class Game {
             }
             case GREEN -> {
                 for (int i = 0; i < green.length; i++) {
-                    if (!green[i].isOnBase()) {
+                    if (!green[i].isOnBase() && !green[i].isHome()) {
                         pieceId = i;
                     }
 
@@ -110,7 +122,7 @@ public class Game {
             }
             case YELLOW -> {
                 for (int i = 0; i < yellow.length; i++) {
-                    if (!yellow[i].isOnBase()) {
+                    if (!yellow[i].isOnBase() && !yellow[i].isHome()) {
                         pieceId = i;
                     }
 
@@ -118,7 +130,7 @@ public class Game {
             }
             case BLUE -> {
                 for (int i = 0; i < blue.length; i++) {
-                    if (!blue[i].isOnBase()) {
+                    if (!blue[i].isOnBase() && !blue[i].isHome()) {
                         pieceId = i;
                     }
 
@@ -126,6 +138,44 @@ public class Game {
             }
         }
         return pieceId;
+    }
+
+    private void updateHomes() {
+        redHomeCounter = 0;
+        greenHomeCounter = 0;
+        yellowHomeCounter = 0;
+        blueHomeCounter = 0;
+        for (int i = 0; i < 4; i++) {
+            if (red[i].isHome()) {
+                redHomeCounter++;
+            }
+            if (green[i].isHome()) {
+                greenHomeCounter++;
+            }
+            if (yellow[i].isHome()) {
+                yellowHomeCounter++;
+            }
+            if (blue[i].isHome()) {
+                blueHomeCounter++;
+            }
+        }
+
+    }
+
+    public static PlayerColor getWinner() {
+        if (redHomeCounter == 4) {
+            return PlayerColor.RED;
+        }
+        if (greenHomeCounter == 4) {
+            return PlayerColor.GREEN;
+        }
+        if (yellowHomeCounter == 4) {
+            return PlayerColor.YELLOW;
+        }
+        if (blueHomeCounter == 4) {
+            return PlayerColor.BLUE;
+        }
+        return null;
     }
 
     //Не сделано:
@@ -146,12 +196,12 @@ public class Game {
                 } else {
                     pieceId = findFigNotOnBase(PlayerColor.RED);
                     if (pieceId == -1) {
-                        System.out.println("Player: "+ clr + "\nTurn skipped");
+                        System.out.println("Player: " + clr + "\nTurn skipped");
                         System.out.println("****************************");
                         break;
                     }
                 }
-                System.out.println("PieceId: " + (pieceId+1) + "\nPlayer: " + clr);
+                System.out.println("PieceId: " + (pieceId + 1) + "\nPlayer: " + clr);
                 red[pieceId].moveBy(n);
             }
             case GREEN -> {
@@ -165,12 +215,12 @@ public class Game {
                 } else {
                     pieceId = findFigNotOnBase(PlayerColor.GREEN);
                     if (pieceId == -1) {
-                        System.out.println("Player: "+ clr + "\nTurn skipped");
+                        System.out.println("Player: " + clr + "\nTurn skipped");
                         System.out.println("****************************");
                         break;
                     }
                 }
-                System.out.println("PieceId: " + (pieceId+1) + "\nPlayer: " + clr);
+                System.out.println("PieceId: " + (pieceId + 1) + "\nPlayer: " + clr);
                 green[pieceId].moveBy(n);
             }
             case YELLOW -> {
@@ -184,12 +234,12 @@ public class Game {
                 } else {
                     pieceId = findFigNotOnBase(PlayerColor.YELLOW);
                     if (pieceId == -1) {
-                        System.out.println("Player: "+ clr + "\nTurn skipped");
+                        System.out.println("Player: " + clr + "\nTurn skipped");
                         System.out.println("****************************");
                         break;
                     }
                 }
-                System.out.println("PieceId: " + (pieceId+1) + "\nPlayer: " + clr);
+                System.out.println("PieceId: " + (pieceId + 1) + "\nPlayer: " + clr);
                 yellow[pieceId].moveBy(n);
             }
             case BLUE -> {
@@ -203,15 +253,16 @@ public class Game {
                 } else {
                     pieceId = findFigNotOnBase(PlayerColor.BLUE);
                     if (pieceId == -1) {
-                        System.out.println("Player: "+ clr + "\nTurn skipped");
+                        System.out.println("Player: " + clr + "\nTurn skipped");
                         System.out.println("****************************");
                         break;
                     }
                 }
-                System.out.println("PieceId: " + (pieceId+1) + "\nPlayer: " + clr);
+                System.out.println("PieceId: " + (pieceId + 1) + "\nPlayer: " + clr);
                 blue[pieceId].moveBy(n);
             }
         }
+        updateHomes();
         return pieceId;
     }
 }

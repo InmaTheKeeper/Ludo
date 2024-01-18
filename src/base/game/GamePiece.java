@@ -21,6 +21,10 @@ public class GamePiece {
         return currentTile instanceof GameBoard.BaseTile;
     }
 
+    public boolean isHome() {
+        return isHome;
+    }
+
     public GameBoard.GameTile getCurTile() {
         return currentTile;
     }
@@ -106,5 +110,4 @@ public class GamePiece {
             currentTile.setSlot2(null);
         }
     }
-
 }
