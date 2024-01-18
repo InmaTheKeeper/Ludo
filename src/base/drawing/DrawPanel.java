@@ -66,7 +66,7 @@ public class DrawPanel extends JPanel {
     public DrawPanel() throws IOException {
         turnButton = new JButton();
         try {
-            bgd = ImageIO.read(new File("C:\\InmaTheKeeper\\Idea_Sketches\\OOP\\Task2\\images\\bgd.jpg"));
+            bgd = ImageIO.read(new File("images/bgd.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
